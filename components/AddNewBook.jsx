@@ -14,6 +14,8 @@ import "../global.css";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
 import { addNewBook } from "../api/routes";
+import { useDispatch } from "react-redux";
+import { setNewBookScreen } from "../store/features/screen/screenSlice";
 
 const AddNewBook = () => {
   const [bookDetails, setBookDetails] = useState({
@@ -27,15 +29,17 @@ const AddNewBook = () => {
     setBookDetails((prev) => ({...prev, [field] : value}));
   }
 
+  const dispatch = useDispatch()
+
   async function handleSubmit() {
-    await addNewBook(bookDetails, setLoading, setBookList);
+    await addNewBook(bookDetails, dispatch);
     await setBookDetails({
       name_of_author: "",
       cover: "",
       price_of_book: "",
       email_of_seller: "",
     });
-    setNewBookScreen(false);
+    dispatch(setNewBookScreen(false))
   }
   return (
     <Modal
@@ -108,7 +112,7 @@ const AddNewBook = () => {
 
           <View className="w-full mt-7">
             <TouchableOpacity
-              onPress={() => setNewBookScreen(false)}
+              onPress={() => dispatch(setNewBookScreen(false))}
               className="w-full pl-5 flex flex-row items-center "
             >
               <AntDesign name="arrowleft" size={30} color="red" />

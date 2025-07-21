@@ -19,6 +19,7 @@ import { addNewBook, getBookList } from "../../api/routes";
 import BookCard from "../../components/BookCard";
 import AddNewBook from "../../components/AddNewBook";
 import EditBook from "../../components/EditBook";
+import { setNewBookScreen } from "../../store/features/screen/screenSlice";
 
 const home = () => {
   const { searchBookText, bookCategories, editBookDetails, activeBookCategory, bookList } = useSelector(
@@ -118,7 +119,9 @@ const home = () => {
 
         <TouchableOpacity
           className="bg-purple-500 px-6 py-3 rounded-full flex-row items-center"
-          onPress={addNewBook}
+          onPress={() =>
+            dispatch(setNewBookScreen(true))
+          }
         >
           <MaterialCommunityIcons name="plus" size={20} color="white" />
           <Text className="text-white font-semibold ml-2">Add Book</Text>

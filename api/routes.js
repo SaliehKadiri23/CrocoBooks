@@ -54,12 +54,12 @@ export const deleteBookById = async (id, setLoading, setBookList) => {
 
 
 // Adding a new book
-export const addNewBook = async (bookDetails, setLoading, setBookList) => {
+export const addNewBook = async (bookDetails, dispatch) => {
   try {
     await axios.post(endpointURL, bookDetails);
     Alert.alert("Success", "Book added successfully!");
 
-    getBookList(setLoading, setBookList);
+    getBookList(dispatch);
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to add book");
