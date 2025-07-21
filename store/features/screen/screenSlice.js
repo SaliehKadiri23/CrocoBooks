@@ -17,8 +17,9 @@ const screenSlice = createSlice({
     setEditBookScreen: (state, action) => {
       state.editBookScreen = action.payload;
     },
-  }
+  },
 });
 
-export const { setLoadingScreen, setNewBookScreen, setEditBookScreen } = screenSlice.actions;
+export const { setLoadingScreen, setNewBookScreen, setEditBookScreen } =
+  screenSlice.actions;
 export default screenSlice.reducer;

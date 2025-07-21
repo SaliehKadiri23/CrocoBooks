@@ -2,23 +2,26 @@ import axios from "axios";
 import { Alert } from "react-native";
 // import {setLoading, setBookList} from "../screens/HomeScreen.jsx"
 import Toast from "react-native-toast-message";
+import { useDispatch, useSelector } from "react-redux";
+import { setBookList } from "../store/features/book/bookSlice";
+import {setLoadingScreen} from "../store/features/screen/screenSlice";
 
 export const endpointURL = "https://687233b576a5723aacd3f1f0.mockapi.io/books";
 
 // Getting all books
-export const getBookList = async (setLoading, setBookList) => {
+export const getBookList = async () => {
+  const dispatch = useDispatch();
 
-  setLoading(true);
+  dispatch(setLoadingScreen(true));
   try {
     const response = await axios.get(endpointURL);
-    
-    setBookList(response.data);
+    dispatch(setBookList(response.data))
     console.log(JSON.stringify(response.data, null, 3));
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to fetch books");
   } finally {
-    setLoading(false);
+    dispatch(setLoadingScreen(false));
   }
 };
 
