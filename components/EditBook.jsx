@@ -14,6 +14,9 @@ import "../global.css";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
 import { editBook } from "../api/routes";
+import { useDispatch } from "react-redux";
+import { setEditBookScreen } from "../store/features/screen/screenSlice";
+import { setEditBookDetails } from "../store/features/book/bookSlice";
 
 const EditBook = ({editBookDetails}) => {
   const [bookDetails, setBookDetails] = useState(editBookDetails);
@@ -23,16 +26,24 @@ const EditBook = ({editBookDetails}) => {
     setBookDetails((prev) => ({...prev, [field] : value}));
   }
 
+
+  const dispatch = useDispatch()
+
   async function handleSubmit() {
-    setEditBookScreen(false);
-    await editBook(bookDetails, setLoading, setBookList);
+    dispatch(setEditBookScreen(false))
+    await editBook(bookDetails);
     await setBookDetails({
       name_of_author: "",
       cover: "",
       price_of_book: "",
       email_of_seller: "",
     });
-    await editBookDetails({})
+    await dispatch(setEditBookDetails({
+      name_of_author: "",
+      cover: "",
+      price_of_book: "",
+      email_of_seller: "",
+    }))
     
   }
   return (

@@ -17,6 +17,8 @@ import {
 } from "../../store/features/book/bookSlice";
 import { addNewBook, getBookList } from "../../api/routes";
 import BookCard from "../../components/BookCard";
+import AddNewBook from "../../components/AddNewBook";
+import EditBook from "../../components/EditBook";
 
 const home = () => {
   const { searchBookText, bookCategories, activeBookCategory, bookList } = useSelector(
@@ -45,12 +47,16 @@ const home = () => {
               Discover your next favorite book
             </Text>
           </View>
-          
         </View>
 
         {/* Search Bar */}
         <View className="flex-row items-center bg-gray-100 rounded-full px-4 py-2 mb-4">
-          <MaterialCommunityIcons className="ml-3" name="magnify" size={25} color="#6B7280" />
+          <MaterialCommunityIcons
+            className="ml-3"
+            name="magnify"
+            size={25}
+            color="#6B7280"
+          />
           <TextInput
             className="flex-1 ml-3 text-gray-800"
             placeholder="Search books, authors..."
@@ -85,7 +91,9 @@ const home = () => {
             >
               <Text
                 className={`font-medium ${
-                  activeBookCategory === category ? "text-white" : "text-gray-600"
+                  activeBookCategory === category
+                    ? "text-white"
+                    : "text-gray-600"
                 }`}
               >
                 {category}
@@ -94,6 +102,9 @@ const home = () => {
           ))}
         </ScrollView>
       </View>
+
+      {newBookScreen && <AddNewBook />}
+      {<EditBook editBookDetails/>}
 
       {/* Action Buttons */}
       <View className="flex-row justify-around py-4 bg-white border-t border-b border-gray-100">
@@ -117,7 +128,7 @@ const home = () => {
       {/* Book List */}
       {loadingScreen ? (
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size={"large"} color={"blue"}/>
+          <ActivityIndicator size={"large"} color={"blue"} />
           <Text className="text-gray-600 mt-2">Loading books...</Text>
         </View>
       ) : filteredBooks && filteredBooks.length > 0 ? (
