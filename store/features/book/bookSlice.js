@@ -15,12 +15,25 @@ const bookSlice = createSlice({
   },
 
   reducers: {
-    setBookList: (state, action) => state.bookList = action.payload,
-    setActiveBookCategory: (state, action) => state.activeBookCategory = action.payload,    
-    setSearchBookText: (state, action) => state.searchBookText = action.payload,
-    setEditBookDetails: (state, action) => state.editBookDetails = action.payload,
-  }
+    setBookList: (state, action) => {
+      state.bookList = action.payload;
+    },
+    setActiveBookCategory: (state, action) => {
+      state.activeBookCategory = action.payload;
+    },
+    setSearchBookText: (state, action) => {
+      state.searchBookText = action.payload;
+    },
+    setEditBookDetails: (state, action) => {
+      state.editBookDetails = action.payload;
+    },
+  },
 });
 
-export const { setBookList, setActiveBookCategory, setSearchBookText, setEditBookDetails } = bookSlice.actions;
+export const {
+  setBookList,
+  setActiveBookCategory,
+  setSearchBookText,
+  setEditBookDetails,
+} = bookSlice.actions;
 export default bookSlice.reducer;

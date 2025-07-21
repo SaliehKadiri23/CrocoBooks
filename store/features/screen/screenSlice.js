@@ -8,9 +8,15 @@ const screenSlice = createSlice({
     editBookScreen: false,
   },
   reducers: {
-    setLoadingScreen: (state,action) => state.loadingScreen = action.payload,
-    setNewBookScreen: (state,action) => state.newBookScreen = action.payload,
-    setEditBookScreen: (state,action) => state.editBookScreen = action.payload,
+    setLoadingScreen: (state, action) => {
+      state.loadingScreen = action.payload;
+    },
+    setNewBookScreen: (state, action) => {
+      state.newBookScreen = action.payload;
+    },
+    setEditBookScreen: (state, action) => {
+      state.editBookScreen = action.payload;
+    },
   }
 });
 
