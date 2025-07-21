@@ -1,37 +1,46 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
+  ActivityIndicator,
+  FlatList,
   SafeAreaView,
   ScrollView,
   StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
-  FlatList,
-  ActivityIndicator,
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { getBookList } from "../../api/routes";
+import AddNewBook from "../../components/AddNewBook";
+import BookCard from "../../components/BookCard";
+import EditBook from "../../components/EditBook";
 import {
   setActiveBookCategory,
   setSearchBookText,
 } from "../../store/features/book/bookSlice";
-import { addNewBook, getBookList } from "../../api/routes";
-import BookCard from "../../components/BookCard";
-import AddNewBook from "../../components/AddNewBook";
-import EditBook from "../../components/EditBook";
 import { setNewBookScreen } from "../../store/features/screen/screenSlice";
 
 const home = () => {
-  const { searchBookText, bookCategories, editBookDetails, activeBookCategory, bookList } = useSelector(
-    (state) => state.book
-  );
+  const {
+    searchBookText,
+    bookCategories,
+    editBookDetails,
+    activeBookCategory,
+    bookList,
+  } = useSelector((state) => state.book);
 
   const { newBookScreen, editBookScreen, loadingScreen } = useSelector(
     (state) => state.screen
   );
 
-  const filteredBooks = bookList?.filter((book) =>
-    book.name_of_author.toLowerCase().includes(searchBookText.toLowerCase())
+  const filteredBooks = bookList?.filter(
+    (book) =>
+      book.name_of_author
+        .toLowerCase()
+        .includes(searchBookText.toLowerCase()) ||
+      book.price_of_book.toLowerCase().includes(searchBookText.toLowerCase()) ||
+      book.email_of_seller.toLowerCase().includes(searchBookText.toLowerCase())
   );
 
   const dispatch = useDispatch();
@@ -119,9 +128,7 @@ const home = () => {
 
         <TouchableOpacity
           className="bg-purple-500 px-6 py-3 rounded-full flex-row items-center"
-          onPress={() =>
-            dispatch(setNewBookScreen(true))
-          }
+          onPress={() => dispatch(setNewBookScreen(true))}
         >
           <MaterialCommunityIcons name="plus" size={20} color="white" />
           <Text className="text-white font-semibold ml-2">Add Book</Text>
