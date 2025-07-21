@@ -12,6 +12,7 @@ const bookSlice = createSlice({
       price_of_book: "",
       email_of_seller: "",
     },
+    bookCategories: ["All", "New", "Web Development", "Ethics", "Sciences"],
   },
 
   reducers: {
@@ -27,6 +28,9 @@ const bookSlice = createSlice({
     setEditBookDetails: (state, action) => {
       state.editBookDetails = action.payload;
     },
+    // setBookCategories: (state, action) => {
+    //   state.bookCategories.push(action.payload);
+    // },
   },
 });
 

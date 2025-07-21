@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
 import { Alert } from "react-native";
-import { AppContext } from "../AppContext/AppProvider";
 // import {setLoading, setBookList} from "../screens/HomeScreen.jsx"
 import Toast from "react-native-toast-message";
 

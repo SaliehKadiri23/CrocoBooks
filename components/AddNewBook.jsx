@@ -14,7 +14,6 @@ import "../global.css";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
 import { addNewBook } from "../api/routes";
-import { AppContext } from "../AppContext/AppProvider";
 
 const AddNewBook = () => {
   const [bookDetails, setBookDetails] = useState({
@@ -23,22 +22,6 @@ const AddNewBook = () => {
     price_of_book: "",
     email_of_seller: "",
   });
-
-  const {
-    // States
-    bookList,
-    searchText,
-    activeCategory,
-    loading,
-    newBookScreen,
-
-    // State Setters
-    setBookList,
-    setSearchText,
-    setActiveCategory,
-    setLoading,
-    setNewBookScreen,
-  } = useContext(AppContext);
 
   function onChange(field, value) {
     setBookDetails((prev) => ({...prev, [field] : value}));

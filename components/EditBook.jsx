@@ -13,30 +13,11 @@ import React, { useContext } from "react";
 import "../global.css";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useState } from "react";
-import { AppContext } from "../AppContext/AppProvider";
 import { editBook } from "../api/routes";
 
 const EditBook = ({editBookDetails}) => {
   const [bookDetails, setBookDetails] = useState(editBookDetails);
 
-  const {
-    // States
-    bookList,
-    searchText,
-    activeCategory,
-    loading,
-    newBookScreen,
-    editBookScreen,
-
-    // State Setters
-    setBookList,
-    setSearchText,
-    setActiveCategory,
-    setLoading,
-    setNewBookScreen,
-    setEditBookScreen,
-    setEditBookDetails,
-  } = useContext(AppContext);
 
   function onChange(field, value) {
     setBookDetails((prev) => ({...prev, [field] : value}));

@@ -14,27 +14,9 @@ import {
 } from "@expo/vector-icons";
 import { addFavoriteBook, deleteBookById, editBook } from "../api/routes";
 import "../global.css";
-import { AppContext } from "../AppContext/AppProvider";
 import EditBook from "./EditBook";
 const BookCard = ({ item }) => {
-  const {
-    // States
-    bookList,
-    searchText,
-    activeCategory,
-    loading,
-    newBookScreen,
-    editBookScreen,
-
-    // State Setters
-    setBookList,
-    setSearchText,
-    setActiveCategory,
-    setLoading,
-    setNewBookScreen,
-    setEditBookScreen,
-    setEditBookDetails,
-  } = useContext(AppContext);
+  
   return (
     // <View className="bg-white mx-4 mb-6 rounded-2xl shadow-lg overflow-hidden">
     //   <View className="relative">
