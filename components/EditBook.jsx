@@ -31,7 +31,7 @@ const EditBook = ({editBookDetails}) => {
 
   async function handleSubmit() {
     dispatch(setEditBookScreen(false))
-    await editBook(bookDetails);
+    await editBook(bookDetails, dispatch);
     await setBookDetails({
       name_of_author: "",
       cover: "",
@@ -117,7 +117,7 @@ const EditBook = ({editBookDetails}) => {
 
           <View className="w-full mt-7">
             <TouchableOpacity
-              onPress={() => {setEditBookScreen(false)}}
+              onPress={()=>dispatch(setEditBookScreen(false))}
               className="w-full pl-5 flex flex-row items-center "
             >
               <AntDesign name="arrowleft" size={30} color="red" />

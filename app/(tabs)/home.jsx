@@ -21,7 +21,7 @@ import AddNewBook from "../../components/AddNewBook";
 import EditBook from "../../components/EditBook";
 
 const home = () => {
-  const { searchBookText, bookCategories, activeBookCategory, bookList } = useSelector(
+  const { searchBookText, bookCategories, editBookDetails, activeBookCategory, bookList } = useSelector(
     (state) => state.book
   );
 
@@ -104,7 +104,7 @@ const home = () => {
       </View>
 
       {newBookScreen && <AddNewBook />}
-      {<EditBook editBookDetails/>}
+      {editBookScreen && <EditBook editBookDetails={editBookDetails} />}
 
       {/* Action Buttons */}
       <View className="flex-row justify-around py-4 bg-white border-t border-b border-gray-100">

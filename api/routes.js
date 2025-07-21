@@ -67,11 +67,11 @@ export const addNewBook = async (bookDetails, setLoading, setBookList) => {
 };
 
 // Editing a particular book
-export const editBook = async (bookDetails, setLoading, setBookList) => {
+export const editBook = async (bookDetails, dispatch) => {
   try {
     await axios.put(`${endpointURL}/${bookDetails.id}`, bookDetails);
     Alert.alert("Success", "Book updated successfully!");
-    getBookList(setLoading, setBookList); // Check
+    getBookList(dispatch); // Check
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to update book");

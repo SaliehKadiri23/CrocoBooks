@@ -17,6 +17,7 @@ import "../global.css";
 import EditBook from "./EditBook";
 import { useDispatch } from "react-redux";
 import { setEditBookDetails } from "../store/features/book/bookSlice";
+import { setEditBookScreen } from "../store/features/screen/screenSlice";
 const BookCard = ({ item }) => {
 
   const dispatch =  useDispatch()
@@ -146,7 +147,8 @@ const BookCard = ({ item }) => {
           <View className="absolute bottom-2 right-20 bg-green-600/20 rounded-full p-2">
             <TouchableOpacity
               onPress={() => {
-                dispatch(()=>setEditBookDetails(item))
+                dispatch(setEditBookScreen(true))
+                dispatch(setEditBookDetails(item))
               }}
             >
               <AntDesign name="edit" size={24} color="green" />
