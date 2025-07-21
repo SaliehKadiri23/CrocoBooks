@@ -31,7 +31,7 @@ export const addFavoriteBook = async (id) => {
 
 
 // Deleting a particular book with (id)
-export const deleteBookById = async (id, setLoading, setBookList) => {
+export const deleteBookById = async (id, dispatch) => {
   Alert.alert("Delete Book", "Are you sure you want to delete this book?", [
     { text: "Cancel", style: "cancel" },
     {
@@ -41,7 +41,7 @@ export const deleteBookById = async (id, setLoading, setBookList) => {
         try {
           await axios.delete(`${endpointURL}/${id}`);
           Alert.alert("Success", "Book deleted successfully!");
-          getBookList(setLoading, setBookList);
+          getBookList(dispatch);
         } catch (error) {
           console.log("An Error Just Occured", error);
           Alert.alert("Error", "Failed to delete book");

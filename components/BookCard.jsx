@@ -135,7 +135,7 @@ const BookCard = ({ item }) => {
         <View className="w-[65%] shadow-lg bg-white h-full">
           {/* Add to favorite */}
           <View className="absolute top-3 right-3 bg-black/20 rounded-full p-2">
-            <TouchableOpacity onPress={() => addFavoriteBook(item.id)}>
+            <TouchableOpacity onPress={()=>addFavoriteBook(item.id)}>
               <MaterialCommunityIcons
                 name="heart-outline"
                 size={20}
@@ -158,7 +158,7 @@ const BookCard = ({ item }) => {
           {/* Delete Book */}
           <View className="absolute bottom-2 right-3 bg-red-600/20 rounded-full p-2">
             <TouchableOpacity
-              onPress={() => deleteBookById(item.id, setLoading, setBookList)}
+              onPress={() => deleteBookById(item.id, dispatch)}
             >
               <MaterialIcons name="delete" size={24} color="red" />
             </TouchableOpacity>
