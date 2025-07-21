@@ -9,10 +9,9 @@ import {setLoadingScreen} from "../store/features/screen/screenSlice";
 export const endpointURL = "https://687233b576a5723aacd3f1f0.mockapi.io/books";
 
 // Getting all books
-export const getBookList = async () => {
-  const dispatch = useDispatch();
-
+export const getBookList = async (dispatch) => {
   dispatch(setLoadingScreen(true));
+  console.log("ran");
   try {
     const response = await axios.get(endpointURL);
     dispatch(setBookList(response.data))
