@@ -5,6 +5,7 @@ const bookSlice = createSlice({
   initialState: {
     bookList: [],
     favoriteBookList: [],
+    cartBookList: [],
     activeBookCategory: "All",
     searchBookText: "",
     editBookDetails: {
@@ -22,6 +23,9 @@ const bookSlice = createSlice({
     },
     setFavoriteBookList: (state, action) => {
       state.favoriteBookList = action.payload;
+    },
+    setCartBookList: (state, action) => {
+      state.cartBookList = action.payload;
     },
     setActiveBookCategory: (state, action) => {
       state.activeBookCategory = action.payload;
@@ -44,5 +48,6 @@ export const {
   setActiveBookCategory,
   setSearchBookText,
   setEditBookDetails,
+  setCartBookList
 } = bookSlice.actions;
 export default bookSlice.reducer;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Alert } from "react-native";
 // import {setLoading, setBookList} from "../screens/HomeScreen.jsx"
-import { setBookList, setFavoriteBookList } from "../store/features/book/bookSlice";
+import { setBookList, setCartBookList, setFavoriteBookList } from "../store/features/book/bookSlice";
 import { setLoadingScreen } from "../store/features/screen/screenSlice";
 
 export const endpointURL =
@@ -38,6 +38,22 @@ export const getFavoriteBookList = async (dispatch) => {
   }
 };
 
+// Getting all books in cart
+export const getCartBookList = async (dispatch) => {
+  dispatch(setLoadingScreen(true));
+  try {
+    const response = await axios.get(endpointURL);
+    const cartBooks = response.data.filter((book) => book.isInCart === true);
+    dispatch(setCartBookList(cartBooks));
+    console.log(JSON.stringify(response.data, null, 3));
+  } catch (error) {
+    console.log("An Error Just Occured", error);
+    Alert.alert("Error", "Failed to your favorite fetch books");
+  } finally {
+    dispatch(setLoadingScreen(false));
+  }
+};
+
 export const toggleFavoriteBook = async (item, dispatch) => {
   
   try {
@@ -54,6 +70,28 @@ export const toggleFavoriteBook = async (item, dispatch) => {
     // dispatch(setLoadingScreen(false));
     
     getFavoriteBookList(dispatch);
+    getBookList(dispatch)
+  } catch (error) {
+    console.log("An Error Just Occured", error);
+    Alert.alert("Error", "Failed to update book");
+  }
+};
+export const toggleCartBook = async (item, dispatch) => {
+  
+  try {
+    dispatch(setLoadingScreen(true))
+    const bookDetails = {
+      ...item,
+      isInCart: !item.isInCart,
+    };
+    await axios.put(`${endpointURL}/${bookDetails.id}`, bookDetails);
+    if (bookDetails.isInCart === false) {
+      Alert.alert("Success", "The Book was removed from your cart");
+    } else {
+      Alert.alert("Success", "The Book was added to your cart");
+    }
+    
+    getCartBookList(dispatch);
     getBookList(dispatch)
   } catch (error) {
     console.log("An Error Just Occured", error);

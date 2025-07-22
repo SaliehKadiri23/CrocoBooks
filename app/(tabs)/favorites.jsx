@@ -3,13 +3,13 @@ import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  FlatList,
+  RefreshControl,
   SafeAreaView,
   StatusBar,
   Text,
   TouchableOpacity,
   View,
-  FlatList,
-  RefreshControl,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavoriteBookList } from "../../api/routes";
@@ -21,12 +21,6 @@ const favorites = () => {
     setRefreshing(true);
     getFavoriteBookList(dispatch);
     setRefreshing(false);
-    // // Simulate API call or data refresh
-    // setTimeout(() => {
-    //   // Your refresh logic here
-    //   console.log("Data refreshed!");
-    //   setRefreshing(false);
-    // }, 2000);
   };
   const {
     searchBookText,
@@ -54,7 +48,7 @@ const favorites = () => {
           <Text className="text-gray-600 mt-2">Loading favorite books...</Text>
         </View>
       ) : favoriteBookList && favoriteBookList.length > 0 ? (
-        <View className="flex-1 mt-9 mb-9">
+        <View className="flex-1 mt-9 mb-4">
           <Text className="text-center text-3xl font-bold italic mb-3">
             Your Favorite Books...
           </Text>

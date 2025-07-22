@@ -5,11 +5,12 @@ import {
 } from "@expo/vector-icons";
 import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
-import { addFavoriteBook, deleteBookById, toggleFavoriteBook } from "../api/routes";
+import { addFavoriteBook, deleteBookById, toggleCartBook, toggleFavoriteBook } from "../api/routes";
 import "../global.css";
 import { setEditBookDetails } from "../store/features/book/bookSlice";
 import { setEditBookScreen } from "../store/features/screen/screenSlice";
-const BookCard = ({ item }) => {
+import { Pressable } from "react-native";
+const BookCard = ({ item, isCart = false }) => {
   const dispatch = useDispatch();
 
   return (
@@ -108,45 +109,51 @@ const BookCard = ({ item }) => {
             source={{
               uri: "https://picsum.photos/seed/NnVnflA3/2140/3048",
             }}
-            // resizeMode="cover"
+            resizeMode="cover"
           />
         </View>
         {/* Book Details */}
         <View className="w-[65%] shadow-lg bg-white h-full">
           {/* Add to favorite */}
-          <View className="absolute top-3 right-3 rounded-full p-0">
-            <TouchableOpacity onPress={() => toggleFavoriteBook(item, dispatch)}>
-              <MaterialCommunityIcons
-                name="heart-circle-outline"
-                size={35}
-                color={item.isFavorite ? "red" : "gray"}
-              />
-              {/* <MaterialCommunityIcons
-                name="heart-outline"
-                size={20}
-                color="red"
-                fill="red"
-              /> */}
-            </TouchableOpacity>
-          </View>
+          {isCart ? null : (
+            <View className="absolute top-3 right-3 rounded-full p-0">
+              <TouchableOpacity
+                onPress={() => toggleFavoriteBook(item, dispatch)}
+              >
+                <MaterialCommunityIcons
+                  name="heart-circle-outline"
+                  size={35}
+                  color={item.isFavorite ? "red" : "gray"}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+
           {/* Edit Book */}
-          <View className="absolute bottom-2 right-20 bg-green-600/20 rounded-full p-2">
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(setEditBookScreen(true));
-                dispatch(setEditBookDetails(item));
-              }}
-            >
-              <AntDesign name="edit" size={24} color="green" />
-            </TouchableOpacity>
-          </View>
+          {isCart ? null : (
+            <View className="absolute bottom-2 right-20 bg-green-600/20 rounded-full p-2">
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(setEditBookScreen(true));
+                  dispatch(setEditBookDetails(item));
+                }}
+              >
+                <AntDesign name="edit" size={24} color="green" />
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/* Delete Book */}
-          <View className="absolute bottom-2 right-3 bg-red-600/20 rounded-full p-2">
-            <TouchableOpacity onPress={() => deleteBookById(item.id, dispatch)}>
-              <MaterialIcons name="delete" size={24} color="red" />
-            </TouchableOpacity>
-          </View>
+          {isCart ? null : (
+            <View className="absolute bottom-2 right-3 bg-red-600/20 rounded-full p-2">
+              <TouchableOpacity
+                onPress={() => deleteBookById(item.id, dispatch)}
+              >
+                <MaterialIcons name="delete" size={24} color="red" />
+              </TouchableOpacity>
+            </View>
+          )}
+
           {/* Price of book */}
           <View className="absolute bottom-3 left-3 bg-emerald-500 px-3 py-1 rounded-full">
             <Text className="text-white font-semibold text-sm">
@@ -189,18 +196,41 @@ const BookCard = ({ item }) => {
                 </Text>
               </View>
             </View>
-            <View className="mt-2">
-              <TouchableOpacity
-                className="self-start"
-                onPress={() =>
-                  Alert.alert("Added to Cart", "Book added to your cart!")
-                }
-              >
-                <Text className="text-white font-semibold text-sm bg-blue-500 px-4 py-2 rounded-full">
-                  Add to Cart
-                </Text>
-              </TouchableOpacity>
-            </View>
+
+            {/* Add TO / Remove FROM Cart button */}
+            {isCart ? (
+              // Remove From Cart
+
+              <View className="mt-2">
+                <TouchableOpacity
+                  className="self-start"
+                  onPress={() => toggleCartBook(item, dispatch)}
+                >
+                  <Text className="text-white font-semibold text-sm bg-red-500 px-4 py-2 rounded-full">
+                    Remove from Cart
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : item.isInCart ? (
+              <View className="mt-2">
+                <Pressable className="self-start">
+                  <Text className="text-white font-semibold text-sm bg-green-500 px-4 py-2 rounded-lg">
+                    Added to Cart
+                  </Text>
+                </Pressable>
+              </View> // Add to Cart
+            ) : (
+              <View className="mt-2">
+                <TouchableOpacity
+                  className="self-start"
+                  onPress={() => toggleCartBook(item, dispatch)}
+                >
+                  <Text className="text-white font-semibold text-sm bg-blue-500 px-4 py-2 rounded-full">
+                    Add to Cart
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
         </View>
       </View>

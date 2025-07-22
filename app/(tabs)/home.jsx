@@ -21,7 +21,7 @@ import {
   setSearchBookText,
 } from "../../store/features/book/bookSlice";
 import { setNewBookScreen } from "../../store/features/screen/screenSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const home = () => {
   const {
@@ -43,6 +43,9 @@ const home = () => {
     getBookList(dispatch)
     setRefreshing(false);
   };
+  useEffect(() => {
+    getBookList(dispatch);
+  }, []);
 
   const filteredBooks = bookList?.filter(
     (book) =>
