@@ -29,7 +29,6 @@ export default function TabLayout() {
         }),
       }}
     >
-
       <Tabs.Screen
         name="home"
         options={{
@@ -39,6 +38,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="favorites"
         options={{
@@ -48,6 +48,7 @@ export default function TabLayout() {
           ),
         }}
       />
+
       <Tabs.Screen
         name="cart"
         options={{
@@ -62,7 +63,7 @@ export default function TabLayout() {
         options={{
           title: "Account",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="account-circle" size={24} color={color} />
+            <MaterialIcons name="stars" size={24} color={color} />
           ),
         }}
       />

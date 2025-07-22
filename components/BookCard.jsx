@@ -1,27 +1,17 @@
 import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
-import React, { useContext } from "react";
-import {
+  AntDesign,
   MaterialCommunityIcons,
   MaterialIcons,
-  AntDesign,
 } from "@expo/vector-icons";
-import { addFavoriteBook, deleteBookById, editBook } from "../api/routes";
-import "../global.css";
-import EditBook from "./EditBook";
+import { Alert, Image, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
+import { addFavoriteBook, deleteBookById, toggleFavoriteBook } from "../api/routes";
+import "../global.css";
 import { setEditBookDetails } from "../store/features/book/bookSlice";
 import { setEditBookScreen } from "../store/features/screen/screenSlice";
 const BookCard = ({ item }) => {
+  const dispatch = useDispatch();
 
-  const dispatch =  useDispatch()
-  
   return (
     // <View className="bg-white mx-4 mb-6 rounded-2xl shadow-lg overflow-hidden">
     //   <View className="relative">
@@ -116,17 +106,7 @@ const BookCard = ({ item }) => {
           <Image
             className="w-full h-full rounded-xl"
             source={{
-              uri:
-                item.cover ===
-                  "https://loremflickr.com/1104/1965?lock=6287645115451669" ||
-                item.cover ===
-                  "https://loremflickr.com/1378/912?lock=2614722917990689" ||
-                item.cover ===
-                  "https://loremflickr.com/3546/256?lock=7409429111691894" ||
-                item.cover ===
-                  "https://loremflickr.com/2820/1782?lock=1936214136075007"
-                  ? "https://picsum.photos/seed/NnVnflA3/2140/3048"
-                  : item.cover,
+              uri: "https://picsum.photos/seed/NnVnflA3/2140/3048",
             }}
             // resizeMode="cover"
           />
@@ -134,21 +114,27 @@ const BookCard = ({ item }) => {
         {/* Book Details */}
         <View className="w-[65%] shadow-lg bg-white h-full">
           {/* Add to favorite */}
-          <View className="absolute top-3 right-3 bg-black/20 rounded-full p-2">
-            <TouchableOpacity onPress={()=>addFavoriteBook(item.id)}>
+          <View className="absolute top-3 right-3 rounded-full p-0">
+            <TouchableOpacity onPress={() => toggleFavoriteBook(item, dispatch)}>
               <MaterialCommunityIcons
+                name="heart-circle-outline"
+                size={35}
+                color={item.isFavorite ? "red" : "gray"}
+              />
+              {/* <MaterialCommunityIcons
                 name="heart-outline"
                 size={20}
-                color="white"
-              />
+                color="red"
+                fill="red"
+              /> */}
             </TouchableOpacity>
           </View>
           {/* Edit Book */}
           <View className="absolute bottom-2 right-20 bg-green-600/20 rounded-full p-2">
             <TouchableOpacity
               onPress={() => {
-                dispatch(setEditBookScreen(true))
-                dispatch(setEditBookDetails(item))
+                dispatch(setEditBookScreen(true));
+                dispatch(setEditBookDetails(item));
               }}
             >
               <AntDesign name="edit" size={24} color="green" />
@@ -157,9 +143,7 @@ const BookCard = ({ item }) => {
 
           {/* Delete Book */}
           <View className="absolute bottom-2 right-3 bg-red-600/20 rounded-full p-2">
-            <TouchableOpacity
-              onPress={() => deleteBookById(item.id, dispatch)}
-            >
+            <TouchableOpacity onPress={() => deleteBookById(item.id, dispatch)}>
               <MaterialIcons name="delete" size={24} color="red" />
             </TouchableOpacity>
           </View>

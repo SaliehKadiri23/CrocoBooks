@@ -8,6 +8,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  RefreshControl,
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,7 @@ import {
   setSearchBookText,
 } from "../../store/features/book/bookSlice";
 import { setNewBookScreen } from "../../store/features/screen/screenSlice";
+import { useState } from "react";
 
 const home = () => {
   const {
@@ -33,6 +35,14 @@ const home = () => {
   const { newBookScreen, editBookScreen, loadingScreen } = useSelector(
     (state) => state.screen
   );
+  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    getBookList(dispatch)
+    setRefreshing(false);
+  };
 
   const filteredBooks = bookList?.filter(
     (book) =>
@@ -43,7 +53,7 @@ const home = () => {
       book.email_of_seller.toLowerCase().includes(searchBookText.toLowerCase())
   );
 
-  const dispatch = useDispatch();
+  
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <StatusBar barStyle="dark-content" backgroundColor="#F9FAFB" />
@@ -148,6 +158,9 @@ const home = () => {
           renderItem={({ item }) => <BookCard item={item} />}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingVertical: 8 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       ) : (
         <View className="flex-1 justify-center items-center px-8">

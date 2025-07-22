@@ -4,6 +4,7 @@ const bookSlice = createSlice({
   name: "book",
   initialState: {
     bookList: [],
+    favoriteBookList: [],
     activeBookCategory: "All",
     searchBookText: "",
     editBookDetails: {
@@ -18,6 +19,9 @@ const bookSlice = createSlice({
   reducers: {
     setBookList: (state, action) => {
       state.bookList = action.payload;
+    },
+    setFavoriteBookList: (state, action) => {
+      state.favoriteBookList = action.payload;
     },
     setActiveBookCategory: (state, action) => {
       state.activeBookCategory = action.payload;
@@ -36,6 +40,7 @@ const bookSlice = createSlice({
 
 export const {
   setBookList,
+  setFavoriteBookList,
   setActiveBookCategory,
   setSearchBookText,
   setEditBookDetails,
