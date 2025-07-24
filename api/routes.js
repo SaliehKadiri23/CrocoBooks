@@ -13,7 +13,7 @@ export const getBookList = async (dispatch) => {
   try {
     const response = await axios.get(endpointURL);
     dispatch(setBookList(response.data));
-    console.log(JSON.stringify(response.data, null, 3));
+    // console.log(JSON.stringify(response.data, null, 3));
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to fetch books");
@@ -22,14 +22,14 @@ export const getBookList = async (dispatch) => {
   }
 };
 
-// Getting all books
+// Getting all Favorite books
 export const getFavoriteBookList = async (dispatch) => {
   dispatch(setLoadingScreen(true));
   try {
     const response = await axios.get(endpointURL);
     const favoriteBooks = response.data.filter(book => book.isFavorite === true)
     dispatch(setFavoriteBookList(favoriteBooks));
-    console.log(JSON.stringify(response.data, null, 3));
+    // console.log(JSON.stringify(response.data, null, 3));
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to your favorite fetch books");
@@ -45,7 +45,7 @@ export const getCartBookList = async (dispatch) => {
     const response = await axios.get(endpointURL);
     const cartBooks = response.data.filter((book) => book.isInCart === true);
     dispatch(setCartBookList(cartBooks));
-    console.log(JSON.stringify(response.data, null, 3));
+    // console.log(JSON.stringify(response.data, null, 3));
   } catch (error) {
     console.log("An Error Just Occured", error);
     Alert.alert("Error", "Failed to your favorite fetch books");
@@ -54,6 +54,7 @@ export const getCartBookList = async (dispatch) => {
   }
 };
 
+// Toggle Favorite book
 export const toggleFavoriteBook = async (item, dispatch) => {
   
   try {
@@ -76,6 +77,8 @@ export const toggleFavoriteBook = async (item, dispatch) => {
     Alert.alert("Error", "Failed to update book");
   }
 };
+
+// Toggle Cart book
 export const toggleCartBook = async (item, dispatch) => {
   
   try {

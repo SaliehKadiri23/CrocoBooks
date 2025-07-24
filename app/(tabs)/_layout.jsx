@@ -29,15 +29,7 @@ export default function TabLayout() {
         }),
       }}
     >
-      <Tabs.Screen
-        name="cart"
-        options={{
-          title: "Cart",
-          tabBarIcon: ({ color }) => (
-            <Entypo name="shopping-cart" size={24} color={color} />
-          ),
-        }}
-      />
+      
       <Tabs.Screen
         name="home"
         options={{
@@ -54,6 +46,15 @@ export default function TabLayout() {
           title: "Favorites",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="favorite" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Cart",
+          tabBarIcon: ({ color }) => (
+            <Entypo name="shopping-cart" size={24} color={color} />
           ),
         }}
       />
