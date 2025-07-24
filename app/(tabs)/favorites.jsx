@@ -86,7 +86,7 @@ const favorites = () => {
                 <Text className="text-md text-center  text-gray-600">
                   Try adding books your Favorite books here by clicking on the
                   heart icon (❤️) in the
-                  <Link href="./home.jsx" className="text-blue-500 font-bold">
+                  <Link href="/home" className="text-blue-500 font-bold">
                     {" "}
                     Home Page
                   </Link>

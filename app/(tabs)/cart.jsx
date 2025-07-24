@@ -156,12 +156,12 @@ const cart = () => {
             <Text className="text-white font-semibold ml-2">Refresh Cart</Text>
           </TouchableOpacity>
           {bookList && (
-            <View className="w-full mt-5 flext flex-row justify-center">
+            <View className="w-full mt-5 flex flex-row justify-center">
               <View className="flex flex-row w-[95%] justify-center items-center">
                 <Text className="text-md text-center  text-gray-600">
                   Try adding books to your cart by clicking on the "Add To Cart"
                   button in the
-                  <Link href="./home.jsx" className="text-blue-500 font-bold">
+                  <Link href="/home" className="text-blue-500 font-bold">
                     {" "}
                     Home Page
                   </Link>
@@ -170,7 +170,7 @@ const cart = () => {
                     or{" "}
                     <Link
                       className="text-blue-500 font-bold"
-                      href="./favorites.jsx"
+                      href="/favorites"
                     >
                       Favorites Page
                     </Link>
