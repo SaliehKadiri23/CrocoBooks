@@ -27,9 +27,9 @@ const account = () => {
     <SafeAreaView className="flex-1 bg-black">
       <StatusBar style="auto" />
       <View className="w-full flex-1  bg-white">
-        <Text className="text-center mt-7 my-2 pb-3 text-3xl font-bold border-b-2 border-b-gray-400">
+        <View className="mt-7"><Text className="text-center mt-10 pb-3 text-3xl font-bold border-b-2 border-b-gray-400">
           Hello There, User
-        </Text>
+        </Text></View>
 
         <View className="w-full">
           <Link href="/home" asChild>
