@@ -135,13 +135,7 @@ const cart = () => {
           }
         />
       ) : (
-        // <View className="flex-1 mt-9 mb-4">
-        //   <Text className="text-center text-3xl font-bold italic mb-3">
-        //     Your Cart...
-        //   </Text>
-
-        //   <View><Text>Summary</Text></View>
-        // </View>
+       
         <View className="flex-1 justify-center items-center px-8">
           <AntDesign name="shoppingcart" size={80} color="#D1D5DB" />
 

@@ -4,7 +4,6 @@ import {
   FlatList,
   SafeAreaView,
   ScrollView,
-  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
@@ -22,6 +21,7 @@ import {
 } from "../../store/features/book/bookSlice";
 import { setNewBookScreen } from "../../store/features/screen/screenSlice";
 import { useEffect, useState } from "react";
+import { StatusBar } from "expo-status-bar";
 
 const home = () => {
   const {
@@ -30,6 +30,8 @@ const home = () => {
     editBookDetails,
     activeBookCategory,
     bookList,
+    favoriteBookList,
+    cartBookList,
   } = useSelector((state) => state.book);
 
   const { newBookScreen, editBookScreen, loadingScreen } = useSelector(
@@ -59,7 +61,7 @@ const home = () => {
   
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
-      <StatusBar barStyle="dark-content" backgroundColor="#F9FAFB" />
+      <StatusBar style="auto"  />
 
       {/* Header */}
       <View className="bg-white px-4 py-4 mt-7 shadow-sm">
@@ -81,7 +83,7 @@ const home = () => {
             color="#6B7280"
           />
           <TextInput
-            className="flex-1 ml-3 text-gray-800"
+            className="flex-1 ml-3 text-gray-800 outline-none"
             placeholder="Search books, authors..."
             placeholderTextColor="#9CA3AF"
             value={searchBookText}
