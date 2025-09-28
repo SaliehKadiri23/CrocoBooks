@@ -106,8 +106,11 @@ const BookCard = ({ item, isCart = false }) => {
         <View className="w-[35%] shadow-lg bg-white h-full">
           <Image
             className="w-full h-full rounded-xl"
+  //           source={{ uri: "https://res.cloudinary.com/dihztovpo/image/upload/v1757875622/the-new-york-public-library--E94YP-PBrI-unsplash_f2pxmo.jpg" }}
+  // style={{ width: 200, height: 300 }}
+  // resizeMode="cover"
             source={{
-              uri: "https://picsum.photos/seed/NnVnflA3/2140/3048",
+              uri: item.cover ? item.cover : "https://res.cloudinary.com/dihztovpo/image/upload/v1757875622/the-new-york-public-library--E94YP-PBrI-unsplash_f2pxmo.jpg",
             }}
             resizeMode="cover"
           />
@@ -180,7 +183,7 @@ const BookCard = ({ item, isCart = false }) => {
                 color="#FFC107"
               />
               <Text className="ml-2 text-gray-600 text-sm">
-                4.0 (23 reviews)
+                4.9 (34 reviews)
               </Text>
             </View>
 

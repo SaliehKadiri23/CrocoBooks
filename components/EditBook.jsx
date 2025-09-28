@@ -83,14 +83,14 @@ const EditBook = ({editBookDetails}) => {
           </View>
           {/* Price */}
           <View className="w-full gap-3 px-4  border-b-2 border-dashed border-gray-500 pb-3">
-            <Text className="text-xl font-bold mt-4 ">Price of Book (₦) :</Text>
+            <Text className="text-xl font-bold mt-4 ">Price of Book ($) :</Text>
             <TextInput
               editable
               value={bookDetails.price_of_book}
               onChangeText={(value) => onChange("price_of_book", value)}
               keyboardType="numeric"
               className="border-2 text-black pl-4 text-lg border-gray-500 rounded-3xl"
-              placeholder="Enter the book's price, e.g ₦2000"
+              placeholder="Enter the book's price, e.g $15"
             />
           </View>
           {/* Author's E-mail */}

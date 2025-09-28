@@ -67,7 +67,7 @@ const home = () => {
       <View className="bg-white px-4 py-4 mt-7 shadow-sm">
         <View className="flex-row items-center justify-between mb-4">
           <View>
-            <Text className="text-2xl font-bold text-gray-800">BookStore</Text>
+            <Text className="text-2xl font-bold text-gray-800">Croco Books</Text>
             <Text className="text-gray-600">
               Discover your next favorite book
             </Text>
